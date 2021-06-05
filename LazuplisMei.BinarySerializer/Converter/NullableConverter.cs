@@ -8,7 +8,7 @@ namespace LazuplisMei.BinarySerializer.Converter
 {
 
     [GenericConverter(typeof(Nullable<>))]
-    public class NullableConverter : GenericConverter
+    class NullableConverter : GenericConverter
     {
 
         public override object GenericReadBytes(Stream stream)

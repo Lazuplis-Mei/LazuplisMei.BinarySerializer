@@ -10,7 +10,7 @@ namespace LazuplisMei.BinarySerializer.Converter
     /// <summary>
     /// element keyword type
     /// </summary>
-    public enum ElementType
+    enum ElementType
     {
         NotElementType = -1,
         Boolean,
@@ -28,7 +28,7 @@ namespace LazuplisMei.BinarySerializer.Converter
         Decimal
     }
 
-    public class ElementTypeConverter : IBinaryConverter
+    class ElementTypeConverter : IBinaryConverter
     {
         private static ElementTypeConverter _instance;
         public static ElementTypeConverter Instance => _instance ??= new ElementTypeConverter();

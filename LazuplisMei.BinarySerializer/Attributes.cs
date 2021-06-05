@@ -21,8 +21,14 @@ namespace LazuplisMei.BinarySerializer
     [AttributeUsage(AttributeTargets.Constructor)]
     public class BinaryConstructorAttribute : Attribute
     {
+        /// <summary>
+        /// arguments for invoke constructor
+        /// </summary>
         public object[] Args { get; }
 
+        /// <summary>
+        /// binary constructor
+        /// </summary>
         public BinaryConstructorAttribute(params object[] args)
         {
             Args = args;
@@ -35,9 +41,18 @@ namespace LazuplisMei.BinarySerializer
     [AttributeUsage(AttributeTargets.Class)]
     public class GenericConverterAttribute : Attribute
     {
+        /// <summary>
+        /// generic typeArgs count
+        /// </summary>
         public int GenericTypeArgsCount { get; }
+        /// <summary>
+        /// generic type
+        /// </summary>
         public Type GenericType { get; }
 
+        /// <summary>
+        /// generic converter
+        /// </summary>
         public GenericConverterAttribute(Type type)
         {
             if (type?.IsGenericType == true)

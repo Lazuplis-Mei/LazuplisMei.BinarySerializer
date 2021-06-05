@@ -41,6 +41,9 @@ namespace LazuplisMei.BinarySerializer
         /// </summary>
         public static readonly List<Module> Modules = new List<Module>();
 
+        /// <summary>
+        /// current BindingFlags of reflection
+        /// </summary>
         public static BindingFlags BindingFlags => BindingFlags.Instance | BindingFlags.Public |
             (OnlyPublicMember ? BindingFlags.Default : BindingFlags.NonPublic);
 
@@ -133,6 +136,9 @@ namespace LazuplisMei.BinarySerializer
             return memory.ToArray();
         }
 
+        /// <summary>
+        /// serialize object
+        /// </summary>
         public static byte[] Serialize(object obj, bool compress = false)
         {
             if (obj == null)
@@ -142,6 +148,9 @@ namespace LazuplisMei.BinarySerializer
             return compress ? Compress(stream) : stream.ToArray();
         }
 
+        /// <summary>
+        /// serialize <see langword="T"/> object
+        /// </summary>
         public static byte[] Serialize<T>(T obj, bool compress = false)
         {
             MemoryStream stream = new MemoryStream();
@@ -149,6 +158,9 @@ namespace LazuplisMei.BinarySerializer
             return compress ? Compress(stream) : stream.ToArray();
         }
 
+        /// <summary>
+        /// serialize object to stream
+        /// </summary>
         public static void Serialize(object obj, Stream stream)
         {
             if (obj == null)
@@ -156,11 +168,15 @@ namespace LazuplisMei.BinarySerializer
             Serialize(obj.GetType(), obj, stream);
         }
 
+        /// <summary>
+        /// serialize <see langword="T"/> object to stream
+        /// </summary>
         public static void Serialize<T>(T obj, Stream stream)
         {
             Serialize(typeof(T), obj, stream);
         }
 
+        
         private static bool SerializeInternal(Type type, object obj, Stream stream)
         {
             if (AutoAppendAssembly) AddAssembly(type.Assembly);
@@ -185,6 +201,12 @@ namespace LazuplisMei.BinarySerializer
             return false;
         }
 
+        /// <summary>
+        /// serialize object to stream with specified type expected
+        /// </summary>
+        /// <param name="type">some base type of <paramref name="obj"/></param>
+        /// <param name="obj"></param>
+        /// <param name="stream"></param>
         public static void Serialize(Type type, object obj, Stream stream)
         {
             if (!SerializeInternal(type, obj, stream))
@@ -232,29 +254,42 @@ namespace LazuplisMei.BinarySerializer
             return memory;
         }
 
+        /// <summary>
+        /// deserialize object
+        /// </summary>
         public static T Deserialize<T>(byte[] bytes, bool decompress = false)
         {
             MemoryStream stream = new MemoryStream(bytes);
             return Deserialize<T>(decompress ? Decompress(stream) : stream);
         }
 
+        /// <summary>
+        /// deserialize object with specified type expected
+        /// </summary>
         public static object Deserialize(Type type, byte[] bytes, bool decompress = false)
         {
             MemoryStream stream = new MemoryStream(bytes);
             return Deserialize(type, decompress ? Decompress(stream) : stream);
         }
 
+        /// <summary>
+        /// deserialize object from stream
+        /// </summary>
         public static T Deserialize<T>(Stream stream)
         {
             return (T)Deserialize(typeof(T), stream);
         }
 
+        /// <summary>
+        /// deserialize object from stream with specified type expected
+        /// </summary>
         public static object Deserialize(Type type, Stream stream)
         {
             if (type.GetInterfaces().Contains(typeof(IBinarySerializable)))
             {
                 var serializable = (IBinarySerializable)ObjectConverter.CreateInstance(type);
-                return serializable.Deserialize(stream);
+                serializable.Deserialize(stream);
+                return serializable;
             }
 
             foreach (var _converter in _converters)

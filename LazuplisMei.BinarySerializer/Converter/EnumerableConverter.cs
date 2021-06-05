@@ -54,7 +54,7 @@ namespace LazuplisMei.BinarySerializer.Converter
     }
 
     /// <summary>
-    /// any IEnumerable<T> will be treated as List<T>
+    /// any <see cref="IEnumerable{T}"/> will be treated as <see cref="List{T}"/>
     /// </summary>
     [GenericConverter(typeof(IEnumerable<>))]
     class IEnumerableConverter : GenericConverter

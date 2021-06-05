@@ -18,12 +18,18 @@ namespace LazuplisMei.BinarySerializer.Core
         /// property from <see cref="GenericConverterAttribute"/>
         /// </summary>
         public Type GenericType { get; private set; }
+        /// <summary>
+        /// type arguments
+        /// </summary>
         public Type[] TypeArgs { get; private set; }
         /// <summary>
         /// target type to be convert
         /// </summary>
         public Type CurrentType { get; private set; }
 
+        /// <summary>
+        /// indicates whether the specified generic type can be converted
+        /// </summary>
         public bool CanConvert(Type type)
         {
             var attribute = GetType().GetCustomAttribute<GenericConverterAttribute>();
@@ -36,6 +42,9 @@ namespace LazuplisMei.BinarySerializer.Core
             }
             return false;
         }
+        /// <summary>
+        /// implemented generic serialization method 
+        /// </summary>
         public void WriteBytes(Stream stream, object obj)
         {
             if (obj == null)
@@ -48,6 +57,9 @@ namespace LazuplisMei.BinarySerializer.Core
                 GenericWriteBytes(stream, obj);
             }
         }
+        /// <summary>
+        /// implemented generic deserialization method 
+        /// </summary>
         public void ReadBytes(Stream stream, out object obj)
         {
             obj = null;
@@ -57,7 +69,13 @@ namespace LazuplisMei.BinarySerializer.Core
             }
         }
 
+        /// <summary>
+        /// basic abstract generic serialization method
+        /// </summary>
         public abstract void GenericWriteBytes(Stream stream, object obj);
+        /// <summary>
+        /// basic abstract generic deserialization method
+        /// </summary>
         public abstract object GenericReadBytes(Stream stream);
 
     }

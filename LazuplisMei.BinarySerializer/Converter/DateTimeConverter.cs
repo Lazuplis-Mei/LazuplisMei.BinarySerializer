@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LazuplisMei.BinarySerializer.Converter
 {
-    public class DateTimeConverter : BinaryConverter<DateTime>
+    class DateTimeConverter : BinaryConverter<DateTime>
     {
         private static DateTimeConverter _instance;
         public static DateTimeConverter Instance => _instance ??= new DateTimeConverter();
@@ -20,7 +20,7 @@ namespace LazuplisMei.BinarySerializer.Converter
         }
     }
 
-    public class DateTimeOffsetConverter : BinaryConverter<DateTimeOffset>
+    class DateTimeOffsetConverter : BinaryConverter<DateTimeOffset>
     {
         private static DateTimeOffsetConverter _instance;
         public static DateTimeOffsetConverter Instance => _instance ??= new DateTimeOffsetConverter();
@@ -34,7 +34,7 @@ namespace LazuplisMei.BinarySerializer.Converter
         }
     }
 
-    public class TimeSpanConverter : BinaryConverter<TimeSpan>
+    class TimeSpanConverter : BinaryConverter<TimeSpan>
     {
         private static TimeSpanConverter _instance;
         public static TimeSpanConverter Instance => _instance ??= new TimeSpanConverter();

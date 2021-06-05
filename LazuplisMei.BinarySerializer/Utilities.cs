@@ -170,8 +170,6 @@ namespace LazuplisMei.BinarySerializer
         /// <summary>
         /// write a <see cref="int"/> to stream
         /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>
         public static void WriteInt32(this Stream stream, int num)
         {
             stream.Write(BitConverter.GetBytes(num), 0, 4);

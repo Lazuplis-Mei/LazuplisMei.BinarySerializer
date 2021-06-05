@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LazuplisMei.BinarySerializer</name>
+    </assembly>
+    <members>
+        <member name="T:LazuplisMei.BinarySerializer.BinaryIgnoreAttribute">
+            <summary>
+            attribute for fields and attributes, indicating that they will not serialized
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.BinaryConstructorAttribute">
+            <summary>
+            specify a constructor as the entry point for deserialization
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.BinaryConstructorAttribute.Args">
+            <summary>
+            arguments for invoke constructor
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.BinaryConstructorAttribute.#ctor(System.Object[])">
+            <summary>
+            binary constructor
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.GenericConverterAttribute">
+            <summary>
+            specify the base class and type parameters of the generic type converter
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.GenericConverterAttribute.GenericTypeArgsCount">
+            <summary>
+            generic typeArgs count
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.GenericConverterAttribute.GenericType">
+            <summary>
+            generic type
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.GenericConverterAttribute.#ctor(System.Type)">
+            <summary>
+            generic converter
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.GenericConverterAttribute.CheckType(System.Type,System.Type[])">
+            <summary>
+            check whether the type is the specified generic type with typeargs
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Converter.KeyValuePairConverter">
+            <summary>
+            base implement for <see cref="T:LazuplisMei.BinarySerializer.Converter.DictionaryConverter"/>
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Converter.ElementType">
+            <summary>
+            element keyword type
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Converter.ListConverter.ListReadBytes(System.Type,System.IO.Stream)">
+            <summary>
+            read a list of data from stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Converter.ListConverter.ListWriteBytes(System.Type,System.IO.Stream,System.Object)">
+            <summary>
+            write a list of data to stream
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Converter.IEnumerableConverter">
+            <summary>
+            any <see cref="T:System.Collections.Generic.IEnumerable`1"/> will be treated as <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Converter.TypeConverter">
+            <summary>
+            mainly for reflection
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Core.IBinaryConverter">
+            <summary>
+            provide base interface for BinaryConverters
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.IBinaryConverter.CanConvert(System.Type)">
+            <summary>
+            indicates whether the specified type can be converted
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.IBinaryConverter.WriteBytes(System.IO.Stream,System.Object)">
+            <summary>
+            basic interface serialization method 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.IBinaryConverter.ReadBytes(System.IO.Stream,System.Object@)">
+            <summary>
+            basic interface deserialization method 
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Core.BinaryConverter`1">
+            <summary>
+            provide base <see langword="abstract"/> class for BinaryConverters
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.BinaryConverter`1.CanConvert(System.Type)">
+            <summary>
+            indicates whether the specified type <see langword="T"/> can be converted
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.BinaryConverter`1.WriteBytes(System.IO.Stream,System.Object)">
+            <summary>
+            implemented serialization method 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.BinaryConverter`1.ReadBytes(System.IO.Stream,System.Object@)">
+            <summary>
+            implemented deserialization method 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.BinaryConverter`1.WriteBytes(System.IO.Stream,`0)">
+            <summary>
+            basic serialization method 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.BinaryConverter`1.ReadBytes(System.IO.Stream)">
+            <summary>
+            basic deserialization method 
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Core.IBinarySerializable">
+            <summary>
+            for custom implementation of serialization 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.IBinarySerializable.Serialize(System.IO.Stream)">
+            <summary>
+            custom implementation of serialization 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.IBinarySerializable.Deserialize(System.IO.Stream)">
+            <summary>
+            custom implementation of deserialization 
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Core.GenericConverter">
+            <summary>
+            provide converter base classes for generic types<br/>
+            to define a GenericTypeConverter, <see cref="T:LazuplisMei.BinarySerializer.GenericConverterAttribute"/> is required
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.Core.GenericConverter.GenericType">
+            <summary>
+            property from <see cref="T:LazuplisMei.BinarySerializer.GenericConverterAttribute"/>
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.Core.GenericConverter.TypeArgs">
+            <summary>
+            type arguments
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.Core.GenericConverter.CurrentType">
+            <summary>
+            target type to be convert
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.GenericConverter.CanConvert(System.Type)">
+            <summary>
+            indicates whether the specified generic type can be converted
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.GenericConverter.WriteBytes(System.IO.Stream,System.Object)">
+            <summary>
+            implemented generic serialization method 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.GenericConverter.ReadBytes(System.IO.Stream,System.Object@)">
+            <summary>
+            implemented generic deserialization method 
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.GenericConverter.GenericWriteBytes(System.IO.Stream,System.Object)">
+            <summary>
+            basic abstract generic serialization method
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.GenericConverter.GenericReadBytes(System.IO.Stream)">
+            <summary>
+            basic abstract generic deserialization method
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Core.ObjectConverter">
+            <summary>
+            main converter for object
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.ObjectConverter.CreateInstance(System.Type)">
+            <summary>
+            create an object
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.ObjectConverter.WriteBytes``1(``0,System.IO.Stream)">
+            <summary>
+            main serialization method
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.ObjectConverter.WriteBytes(System.Type,System.Object,System.IO.Stream)">
+            <summary>
+            main serialization method
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.ObjectConverter.ReadBytes``1(System.IO.Stream)">
+            <summary>
+            main deserialization method
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Core.ObjectConverter.ReadBytes(System.Type,System.IO.Stream)">
+            <summary>
+            main deserialization method
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.PropertyCannotReadException">
+            <summary>
+            property cannot read
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.PropertyCannotReadException.#ctor">
+            <summary>
+            property cannot read
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.PropertyCannotReadException.#ctor(System.String)">
+            <summary>
+            property cannot read
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.ConstructorNotFoundException">
+            <summary>
+            constructor not found
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.ConstructorNotFoundException.#ctor">
+            <summary>
+            constructor not found
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.ConstructorNotFoundException.#ctor(System.String)">
+            <summary>
+            constructor not found
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.TypeNotFoundException">
+            <summary>
+            Cannot find the specified type , please refer to <see cref="M:LazuplisMei.BinarySerializer.Serializer.AddAssembly(System.Reflection.Assembly)"/>
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.TypeNotFoundException.#ctor">
+            <summary>
+            type not found
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.TypeNotFoundException.#ctor(System.String)">
+            <summary>
+            type not found
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Serializer">
+            <summary>
+            main serializer
+            </summary>
+        </member>
+        <member name="F:LazuplisMei.BinarySerializer.Serializer.OnlyPublicMember">
+            <summary>
+            indicates whether only <see langword="public"/> member will be serialized
+            </summary>
+        </member>
+        <member name="F:LazuplisMei.BinarySerializer.Serializer.AutoAppendAssembly">
+            <summary>
+            indicates whether to automatically add the corresponding assembly of type<br/>
+            while using <see cref="M:LazuplisMei.BinarySerializer.Serializer.Serialize(System.Type,System.Object,System.IO.Stream)"/>
+            </summary>
+        </member>
+        <member name="F:LazuplisMei.BinarySerializer.Serializer.DefaultEncoding">
+            <summary>
+            indicates the encoding used by <see cref="T:LazuplisMei.BinarySerializer.Converter.StringConverter"/>
+            </summary>
+        </member>
+        <member name="F:LazuplisMei.BinarySerializer.Serializer.Modules">
+            <summary>
+            the module corresponding to the loaded assembly used by<see cref="T:LazuplisMei.BinarySerializer.Converter.TypeConverter"/>
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.Serializer.BindingFlags">
+            <summary>
+            current BindingFlags of reflection
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.AddConverter``1">
+            <summary>
+            add a custom BinaryConverter
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.RemoveConverter``1">
+            <summary>
+            remove a BinaryConverter
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.AddAssembly(System.Reflection.Assembly)">
+            <summary>
+            add an assembly used by <see cref="T:LazuplisMei.BinarySerializer.Converter.TypeConverter"/>
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.RemoveAssembly(System.Reflection.Assembly)">
+            <summary>
+            remove assembly
+            </summary>
+            <param name="assembly">程序集</param>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Serialize(System.Object,System.Boolean)">
+            <summary>
+            serialize object
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Serialize``1(``0,System.Boolean)">
+            <summary>
+            serialize <see langword="T"/> object
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Serialize(System.Object,System.IO.Stream)">
+            <summary>
+            serialize object to stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Serialize``1(``0,System.IO.Stream)">
+            <summary>
+            serialize <see langword="T"/> object to stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Serialize(System.Type,System.Object,System.IO.Stream)">
+            <summary>
+            serialize object to stream with specified type expected
+            </summary>
+            <param name="type">some base type of <paramref name="obj"/></param>
+            <param name="obj"></param>
+            <param name="stream"></param>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Deserialize``1(System.Byte[],System.Boolean)">
+            <summary>
+            deserialize object
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Deserialize(System.Type,System.Byte[],System.Boolean)">
+            <summary>
+            deserialize object with specified type expected
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Deserialize``1(System.IO.Stream)">
+            <summary>
+            deserialize object from stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.Deserialize(System.Type,System.IO.Stream)">
+            <summary>
+            deserialize object from stream with specified type expected
+            </summary>
+        </member>
+        <member name="T:LazuplisMei.BinarySerializer.Utilities">
+            <summary>
+            ExtensionMethods
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.IsOrBaseFrom``1(System.Type)">
+            <summary>
+            Indicates whether the type is <see langword="TBase"/> or inherited from <see langword="TBase"/>
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.IsOrBaseFrom(System.Type,System.Type)">
+            <summary>
+            Indicates whether the type is <see langword="TBase"/> or inherited from <see langword="TBase"/>
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.GetMemberValue``1(System.Object,System.String)">
+            <summary>
+            get <see langword="public/private"/> member value
+            </summary>
+            <exception cref="T:LazuplisMei.BinarySerializer.PropertyCannotReadException"/>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.SetMemberValue``1(System.Object,System.String,``0)">
+            <summary>
+            get <see langword="(readonly) public/private"/> member value
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.Invoke(System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            invoke method
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.GetInstance``1(System.Type)">
+            <summary>
+            use (static)self.Instance if exists
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.BytesToInts(System.Byte[])">
+            <summary>
+            convert <see langword="byte[]"/> to <see langword="int[]"/>
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.IntsToBytes(System.Int32[])">
+            <summary>
+            convert <see langword="int[]"/> to <see langword="byte[]"/>
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.ReadBytes(System.IO.Stream,System.Int32)">
+            <summary>
+            read <see cref="T:System.Byte"/>[] from stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.WriteBytes(System.IO.Stream,System.Byte[])">
+            <summary>
+            write <see cref="T:System.Byte"/>[] to stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.ReadInt32(System.IO.Stream)">
+            <summary>
+            read a <see cref="T:System.Int32"/> from stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.WriteInt32(System.IO.Stream,System.Int32)">
+            <summary>
+            write a <see cref="T:System.Int32"/> to stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.ReadInt64(System.IO.Stream)">
+            <summary>
+            read a <see cref="T:System.Int64"/> from stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.WriteInt64(System.IO.Stream,System.Int64)">
+            <summary>
+            write a <see cref="T:System.Int64"/> to stream
+            </summary>
+        </member>
+    </members>
+</doc>

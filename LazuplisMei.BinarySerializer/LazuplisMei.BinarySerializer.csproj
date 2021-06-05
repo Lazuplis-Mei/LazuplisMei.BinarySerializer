@@ -9,6 +9,21 @@
     <Copyright>lazuplis mei</Copyright>
     <PackageLicenseFile></PackageLicenseFile>
     <RepositoryUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</RepositoryUrl>
+    <PackageId>LazuplisMei.BinarySerializer</PackageId>
+    <Version>1.0.0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <PackageProjectUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</PackageProjectUrl>
+    <PackageTags>BinarySerializer</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\PC\Documents\GitHub\LazuplisMei.BinarySerializer\LazuplisMei.BinarySerializer\LazuplisMei.BinarySerializer.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\PC\Documents\GitHub\LazuplisMei.BinarySerializer\LazuplisMei.BinarySerializer\LazuplisMei.BinarySerializer.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

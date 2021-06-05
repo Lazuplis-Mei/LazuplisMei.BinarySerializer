@@ -4,14 +4,21 @@ using System.Text;
 
 namespace LazuplisMei.BinarySerializer
 {
-
+    /// <summary>
+    /// property cannot read
+    /// </summary>
     public class PropertyCannotReadException : Exception
     {
+        /// <summary>
+        /// property cannot read
+        /// </summary>
         public PropertyCannotReadException()
         {
 
         }
-
+        /// <summary>
+        /// property cannot read
+        /// </summary>
         public PropertyCannotReadException(string propertyName)
             : base($"Property cannot read\npropertyName : {propertyName}")
         {
@@ -19,13 +26,21 @@ namespace LazuplisMei.BinarySerializer
         }
     }
 
+    /// <summary>
+    /// constructor not found
+    /// </summary>
     public class ConstructorNotFoundException : Exception
     {
+        /// <summary>
+        /// constructor not found
+        /// </summary>
         public ConstructorNotFoundException()
         {
 
         }
-
+        /// <summary>
+        /// constructor not found
+        /// </summary>
         public ConstructorNotFoundException(string typeName)
             : base($"constructor not found\ntypeName : {typeName}")
         {
@@ -39,11 +54,16 @@ namespace LazuplisMei.BinarySerializer
     /// </summary>
     public class TypeNotFoundException : Exception
     {
+        /// <summary>
+        /// type not found
+        /// </summary>
         public TypeNotFoundException()
         {
 
         }
-
+        /// <summary>
+        /// type not found
+        /// </summary>
         public TypeNotFoundException(string typeName)
             : base($"type not found\ntypeName : {typeName}")
         {

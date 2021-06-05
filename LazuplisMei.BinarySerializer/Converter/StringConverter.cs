@@ -24,7 +24,7 @@ namespace LazuplisMei.BinarySerializer.Converter
         }
     }
 
-    public class EnocdingConverter : BinaryConverter<Encoding>
+    class EnocdingConverter : BinaryConverter<Encoding>
     {
         private static EnocdingConverter _instance;
         public static EnocdingConverter Instance => _instance ??= new EnocdingConverter();

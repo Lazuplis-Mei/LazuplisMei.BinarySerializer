@@ -12,7 +12,7 @@ namespace LazuplisMei.BinarySerializer.Converter
     /// base implement for <see cref="DictionaryConverter"/>
     /// </summary>
     [GenericConverter(typeof(KeyValuePair<,>))]
-    public class KeyValuePairConverter : GenericConverter
+    class KeyValuePairConverter : GenericConverter
     {
         public override object GenericReadBytes(Stream stream)
         {
@@ -31,7 +31,7 @@ namespace LazuplisMei.BinarySerializer.Converter
 
 
     [GenericConverter(typeof(Dictionary<,>))]
-    public class DictionaryConverter : GenericConverter
+    class DictionaryConverter : GenericConverter
     {
         public override object GenericReadBytes(Stream stream)
         {

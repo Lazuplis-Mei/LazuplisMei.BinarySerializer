@@ -43,10 +43,17 @@ namespace LazuplisMei.BinarySerializer.Core
         //private static XXXConverter _instance;
         //public static XXXConverter Instance => _instance ??= new XXXConverter();
 
+        /// <summary>
+        /// indicates whether the specified type <see langword="T"/> can be converted
+        /// </summary>
         public bool CanConvert(Type type)
         {
             return type.IsOrBaseFrom<T>();
         }
+
+        /// <summary>
+        /// implemented serialization method 
+        /// </summary>
         public void WriteBytes(Stream stream, object obj)
         {
             if (obj == null)
@@ -59,6 +66,10 @@ namespace LazuplisMei.BinarySerializer.Core
                 WriteBytes(stream, (T)obj);
             }
         }
+
+        /// <summary>
+        /// implemented deserialization method 
+        /// </summary>
         public void ReadBytes(Stream stream, out object obj)
         {
             obj = null;
@@ -91,6 +102,6 @@ namespace LazuplisMei.BinarySerializer.Core
         /// <summary>
         /// custom implementation of deserialization 
         /// </summary>
-        object Deserialize(Stream stream);
+        void Deserialize(Stream stream);
     }
 }
