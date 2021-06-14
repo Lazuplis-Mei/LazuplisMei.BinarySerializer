@@ -7,15 +7,16 @@
     <Authors>LazuplisMei</Authors>
     <Description>A simple binary serialization library for dotnet</Description>
     <Copyright>lazuplis mei</Copyright>
-    <PackageLicenseFile></PackageLicenseFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</RepositoryUrl>
     <PackageId>LazuplisMei.BinarySerializer</PackageId>
     <Version>1.0.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
     <PackageProjectUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</PackageProjectUrl>
     <PackageTags>BinarySerializer</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,5 +26,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\PC\Documents\GitHub\LazuplisMei.BinarySerializer\LazuplisMei.BinarySerializer\LazuplisMei.BinarySerializer.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

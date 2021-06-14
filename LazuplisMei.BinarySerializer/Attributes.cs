@@ -86,4 +86,27 @@ namespace LazuplisMei.BinarySerializer
         }
     }
 
+
+    /// <summary>
+    /// index for field or property while  serializing
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+    public class BinaryIndexAttribute : Attribute
+    {
+        /// <summary>
+        /// default minvalue for the index
+        /// </summary>
+        public static int DefaultMinValue { get; set; } = int.MinValue;
+        /// <summary>
+        /// Index
+        /// </summary>
+        public int Index { get;}
+        /// <summary>
+        /// index for field or property while  serializing
+        /// </summary>
+        public BinaryIndexAttribute(int index)
+        {
+            Index = index;
+        }
+    }
 }

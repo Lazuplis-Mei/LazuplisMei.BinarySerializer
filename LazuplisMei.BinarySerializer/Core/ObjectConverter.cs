@@ -81,8 +81,8 @@ namespace LazuplisMei.BinarySerializer.Core
         /// </summary>
         public static void WriteBytes(Type type, object obj, Stream stream)
         {
-            var fieldInfos = type.GetFields(Serializer.BindingFlags).OrderBy(f => f.Name);
-            var propertyInfos = type.GetProperties(Serializer.BindingFlags).OrderBy(f => f.Name);
+            var fieldInfos = type.GetFields(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
+            var propertyInfos = type.GetProperties(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
             foreach (var field in fieldInfos)
             {
                 if (field.GetCustomAttribute<BinaryIgnoreAttribute>() == null)
@@ -121,8 +121,8 @@ namespace LazuplisMei.BinarySerializer.Core
         public static object ReadBytes(Type type, Stream stream)
         {
             var result = CreateInstance(type);
-            var fieldInfos = type.GetFields(Serializer.BindingFlags).OrderBy(f => f.Name);
-            var propertyInfos = type.GetProperties(Serializer.BindingFlags).OrderBy(f => f.Name);
+            var fieldInfos = type.GetFields(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
+            var propertyInfos = type.GetProperties(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
 
             foreach (var field in fieldInfos)
             {

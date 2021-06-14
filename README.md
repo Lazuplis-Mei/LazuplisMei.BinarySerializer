@@ -27,6 +27,23 @@ Student stu = Serializer.Deserialize<Student>(buffer);
 //stu.Name == "Name001" && stu.Id == default
 ```
 
+# BinaryIndexAttribute
+
+```cs
+class TestClass
+{
+    [BinaryIndex(1)]
+    public string AAA;
+    [BinaryIndex(0)]
+    public int BBB;
+}
+
+//order by index then by name, BBB will be the first field to serialize
+byte[] buffer = Serializer.Serialize(new TestClass() {AAA = "AAA", BBB = 0 });
+TestClass stu = Serializer.Deserialize<TestClass>(buffer);
+```
+
+
 # add assembly to find type
 
 ```cs
@@ -171,4 +188,21 @@ class HashSetConverter : GenericConverter
 
 //AddConverter
 Serializer.AddConverter<HashSetConverter>();
+```
+
+# ObjectConverter
+
+```cs
+//Whether to use it depends on the situation
+//ObjectConverter does not have basic size check and null check
+//Use it for external information that only has a certain data structure
+class DataInfo
+{
+    //use BinaryIndex ensure that the data is read in the correct order
+    [BinaryIndex(0)]
+    public int BBB;
+    [BinaryIndex(1)]
+    public int AAA; 
+}
+var data = ObjectConverter.ReadBytes<DataInfo>(File.OpenRead(@"C:\xxx.bin"));
 ```

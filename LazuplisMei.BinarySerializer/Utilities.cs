@@ -94,6 +94,22 @@ namespace LazuplisMei.BinarySerializer
             return (T)instance?.GetValue(null) ?? (T)Activator.CreateInstance(self);
         }
 
+        /// <summary>
+        /// get BinaryIndexAttribute.Index of the field
+        /// </summary>
+        public static int GetIndex(this FieldInfo self)
+        {
+            return self.GetCustomAttribute<BinaryIndexAttribute>()?.Index ?? BinaryIndexAttribute.DefaultMinValue;
+        }
+
+        /// <summary>
+        /// get BinaryIndexAttribute.Index of the property
+        /// </summary>
+        public static int GetIndex(this PropertyInfo self)
+        {
+            return self.GetCustomAttribute<BinaryIndexAttribute>()?.Index ?? BinaryIndexAttribute.DefaultMinValue;
+        }
+
         #endregion
 
         #region BytesIntsConvert

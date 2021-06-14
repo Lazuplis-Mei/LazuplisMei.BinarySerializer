@@ -49,6 +49,26 @@
             check whether the type is the specified generic type with typeargs
             </summary>
         </member>
+        <member name="T:LazuplisMei.BinarySerializer.BinaryIndexAttribute">
+            <summary>
+            index for field or property while  serializing
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.BinaryIndexAttribute.DefaultMinValue">
+            <summary>
+            default minvalue for the index
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.BinaryIndexAttribute.Index">
+            <summary>
+            Index
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.BinaryIndexAttribute.#ctor(System.Int32)">
+            <summary>
+            index for field or property while  serializing
+            </summary>
+        </member>
         <member name="T:LazuplisMei.BinarySerializer.Converter.KeyValuePairConverter">
             <summary>
             base implement for <see cref="T:LazuplisMei.BinarySerializer.Converter.DictionaryConverter"/>
@@ -399,6 +419,16 @@
         <member name="M:LazuplisMei.BinarySerializer.Utilities.GetInstance``1(System.Type)">
             <summary>
             use (static)self.Instance if exists
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.GetIndex(System.Reflection.FieldInfo)">
+            <summary>
+            get BinaryIndexAttribute.Index of the field
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.GetIndex(System.Reflection.PropertyInfo)">
+            <summary>
+            get BinaryIndexAttribute.Index of the property
             </summary>
         </member>
         <member name="M:LazuplisMei.BinarySerializer.Utilities.BytesToInts(System.Byte[])">
