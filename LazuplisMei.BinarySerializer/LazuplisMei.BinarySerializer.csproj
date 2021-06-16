@@ -10,13 +10,14 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</RepositoryUrl>
     <PackageId>LazuplisMei.BinarySerializer</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.1.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.0.1.1</AssemblyVersion>
+    <FileVersion>1.0.1.1</FileVersion>
     <PackageProjectUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</PackageProjectUrl>
     <PackageTags>BinarySerializer</PackageTags>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression></PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

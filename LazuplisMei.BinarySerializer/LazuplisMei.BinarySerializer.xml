@@ -421,16 +421,6 @@
             use (static)self.Instance if exists
             </summary>
         </member>
-        <member name="M:LazuplisMei.BinarySerializer.Utilities.GetIndex(System.Reflection.FieldInfo)">
-            <summary>
-            get BinaryIndexAttribute.Index of the field
-            </summary>
-        </member>
-        <member name="M:LazuplisMei.BinarySerializer.Utilities.GetIndex(System.Reflection.PropertyInfo)">
-            <summary>
-            get BinaryIndexAttribute.Index of the property
-            </summary>
-        </member>
         <member name="M:LazuplisMei.BinarySerializer.Utilities.BytesToInts(System.Byte[])">
             <summary>
             convert <see langword="byte[]"/> to <see langword="int[]"/>

@@ -94,22 +94,6 @@ namespace LazuplisMei.BinarySerializer
             return (T)instance?.GetValue(null) ?? (T)Activator.CreateInstance(self);
         }
 
-        /// <summary>
-        /// get BinaryIndexAttribute.Index of the field
-        /// </summary>
-        public static int GetIndex(this FieldInfo self)
-        {
-            return self.GetCustomAttribute<BinaryIndexAttribute>()?.Index ?? BinaryIndexAttribute.DefaultMinValue;
-        }
-
-        /// <summary>
-        /// get BinaryIndexAttribute.Index of the property
-        /// </summary>
-        public static int GetIndex(this PropertyInfo self)
-        {
-            return self.GetCustomAttribute<BinaryIndexAttribute>()?.Index ?? BinaryIndexAttribute.DefaultMinValue;
-        }
-
         #endregion
 
         #region BytesIntsConvert
@@ -210,5 +194,78 @@ namespace LazuplisMei.BinarySerializer
         #endregion
 
     }
+
+
+    class FieldPropertyInfo
+    {
+        private readonly FieldInfo _FieldInfo;
+        private readonly PropertyInfo _PropertyInfo;
+
+        public FieldPropertyInfo(FieldInfo field)
+        {
+            _FieldInfo = field;
+        }
+
+        public FieldPropertyInfo(PropertyInfo property)
+        {
+            _PropertyInfo = property;
+        }
+
+        private bool IsProperty => _PropertyInfo != null;
+        private MemberInfo CurrentMember => IsProperty ? (MemberInfo)_PropertyInfo : _FieldInfo;
+
+        public bool Ignored => CurrentMember.GetCustomAttribute<BinaryIgnoreAttribute>() != null;
+
+        public string Name => CurrentMember.Name;
+
+        public int Index => CurrentMember.GetCustomAttribute<BinaryIndexAttribute>()?.Index ?? BinaryIndexAttribute.DefaultMinValue;
+
+        public Type Type => IsProperty ? _PropertyInfo.PropertyType : _FieldInfo.FieldType;
+
+        public bool TryGetValue(object obj, out object value)
+        {
+            value = null;
+            if (!Ignored)
+            {
+                if (IsProperty)
+                {
+                    if (_PropertyInfo.GetMethod == null)
+                    {
+                        throw new PropertyCannotReadException(_PropertyInfo.Name);
+                    }
+                    if (_PropertyInfo.GetMethod.GetParameters().Length == 0)
+                    {
+                        value = _PropertyInfo.GetValue(obj);
+                        return true;
+                    }
+                }
+                else
+                {
+                    value = _FieldInfo.GetValue(obj);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void SetValue(object obj, object value)
+        {
+            if (IsProperty)
+            {
+                if (_PropertyInfo.SetMethod != null)
+                {
+                    if (_PropertyInfo.SetMethod.GetParameters().Length == 1)
+                    {
+                        _PropertyInfo.SetValue(obj, value);
+                    }
+                }
+            }
+            else
+            {
+                _FieldInfo.SetValue(obj, value);
+            }
+        }
+    }
+
 
 }

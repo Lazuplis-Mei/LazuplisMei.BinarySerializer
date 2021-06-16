@@ -81,27 +81,16 @@ namespace LazuplisMei.BinarySerializer.Core
         /// </summary>
         public static void WriteBytes(Type type, object obj, Stream stream)
         {
-            var fieldInfos = type.GetFields(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
-            var propertyInfos = type.GetProperties(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
-            foreach (var field in fieldInfos)
+            var propList = new List<FieldPropertyInfo>();
+            propList.AddRange(type.GetFields(Serializer.BindingFlags).Select(f => new FieldPropertyInfo(f)));
+            propList.AddRange(type.GetProperties(Serializer.BindingFlags).Select(p => new FieldPropertyInfo(p)));
+            var props = propList.OrderBy(p => p.Index).ThenBy(p => p.Name);
+
+            foreach (var prop in props)
             {
-                if (field.GetCustomAttribute<BinaryIgnoreAttribute>() == null)
+                if (prop.TryGetValue(obj, out object value))
                 {
-                    Serializer.Serialize(field.FieldType, field.GetValue(obj), stream);
-                }
-            }
-            foreach (var property in propertyInfos)
-            {
-                if (property.GetCustomAttribute<BinaryIgnoreAttribute>() == null)
-                {
-                    if (property.GetMethod == null)
-                    {
-                        throw new PropertyCannotReadException(property.Name);
-                    }
-                    if (property.GetMethod.GetParameters().Length == 0)
-                    {
-                        Serializer.Serialize(property.PropertyType, property.GetValue(obj), stream);
-                    }
+                    Serializer.Serialize(prop.Type, value, stream);
                 }
             }
         }
@@ -121,31 +110,19 @@ namespace LazuplisMei.BinarySerializer.Core
         public static object ReadBytes(Type type, Stream stream)
         {
             var result = CreateInstance(type);
-            var fieldInfos = type.GetFields(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
-            var propertyInfos = type.GetProperties(Serializer.BindingFlags).OrderBy(Utilities.GetIndex).ThenBy(f => f.Name);
+            var propList = new List<FieldPropertyInfo>();
+            propList.AddRange(type.GetFields(Serializer.BindingFlags).Select(f => new FieldPropertyInfo(f)));
+            propList.AddRange(type.GetProperties(Serializer.BindingFlags).Select(p => new FieldPropertyInfo(p)));
+            var props = propList.OrderBy(p => p.Index).ThenBy(p => p.Name);
 
-            foreach (var field in fieldInfos)
+            foreach (var prop in props)
             {
-                if (field.GetCustomAttribute<BinaryIgnoreAttribute>() == null)
+                if (!prop.Ignored)
                 {
-                    field.SetValue(result, Serializer.Deserialize(field.FieldType, stream));
+                    prop.SetValue(result, Serializer.Deserialize(prop.Type, stream));
                 }
             }
 
-            foreach (var property in propertyInfos)
-            {
-                if (property.GetCustomAttribute<BinaryIgnoreAttribute>() == null)
-                {
-                    if (property.SetMethod != null)
-                    {
-                        if (property.SetMethod.GetParameters().Length == 1)
-                        {
-                            var value = Serializer.Deserialize(property.PropertyType, stream);
-                            property.SetValue(result, value);
-                        }
-                    }
-                }
-            }
             return result;
         }
 
