@@ -365,6 +365,11 @@
             <param name="obj"></param>
             <param name="stream"></param>
         </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.SerializeWithTypeInfo(System.Object,System.IO.Stream)">
+            <summary>
+            serialize not only values but also Type and properties/fields Name
+            </summary>
+        </member>
         <member name="M:LazuplisMei.BinarySerializer.Serializer.Deserialize``1(System.Byte[],System.Boolean)">
             <summary>
             deserialize object
@@ -383,6 +388,11 @@
         <member name="M:LazuplisMei.BinarySerializer.Serializer.Deserialize(System.Type,System.IO.Stream)">
             <summary>
             deserialize object from stream with specified type expected
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Serializer.DeserializeWithTypeInfo(System.IO.Stream)">
+            <summary>
+            deserialize by not only values but also Type and properties/fields Name
             </summary>
         </member>
         <member name="T:LazuplisMei.BinarySerializer.Utilities">

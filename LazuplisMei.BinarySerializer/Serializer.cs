@@ -18,7 +18,7 @@ namespace LazuplisMei.BinarySerializer
 
         #region Fields
 
-        private static readonly List<Type> _converters;
+        private static readonly List<Type> _Converters;
 
         /// <summary>
         /// indicates whether only <see langword="public"/> member will be serialized
@@ -56,9 +56,9 @@ namespace LazuplisMei.BinarySerializer
         /// </summary>
         public static void AddConverter<T>() where T : IBinaryConverter
         {
-            if (!_converters.Contains(typeof(T)))
+            if (!_Converters.Contains(typeof(T)))
             {
-                _converters.Insert(0, typeof(T));
+                _Converters.Insert(0, typeof(T));
             }
         }
 
@@ -67,7 +67,7 @@ namespace LazuplisMei.BinarySerializer
         /// </summary>
         public static void RemoveConverter<T>() where T : IBinaryConverter
         {
-            _converters.Remove(typeof(T));
+            _Converters.Remove(typeof(T));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace LazuplisMei.BinarySerializer
 
         static Serializer()
         {
-            _converters = new List<Type>();
+            _Converters = new List<Type>();
             OnlyPublicMember = true;
             DefaultEncoding = Encoding.Default;
 
@@ -188,7 +188,7 @@ namespace LazuplisMei.BinarySerializer
                 return true;
             }
 
-            foreach (var _converter in _converters)
+            foreach (var _converter in _Converters)
             {
                 var converter = _converter.GetInstance<IBinaryConverter>();
 
@@ -238,6 +238,40 @@ namespace LazuplisMei.BinarySerializer
                     stream.Position = currentPos;
                 }
             }
+        }
+
+        /// <summary>
+        /// serialize not only values but also Type and properties/fields Name
+        /// </summary>
+        public static void SerializeWithTypeInfo(object obj, Stream stream)
+        {
+            Type type = obj.GetType();
+            var propList = new List<FieldPropertyInfo>();
+            propList.AddRange(type.GetFields(BindingFlags).Select(f => new FieldPropertyInfo(f)));
+            propList.AddRange(type.GetProperties(BindingFlags).Select(p => new FieldPropertyInfo(p)));
+            var props = propList.OrderBy(p => p.Index).ThenBy(p => p.Name);
+
+            //occupy a position
+            int startPos = (int)stream.Position;
+            stream.WriteInt32(0);
+            int count = 0;
+
+            foreach (var prop in props)
+            {
+                if (prop.TryGetValue(obj, out object value))
+                {
+                    Serialize(prop.Name, stream);
+                    Serialize(prop.Type, stream);
+                    Serialize(prop.Type, value, stream);
+                    count++;
+                }
+            }
+
+            //write properties count
+            int currentPos = (int)stream.Position;
+            stream.Position = startPos;
+            stream.WriteInt32(count);
+            stream.Position = currentPos;
         }
 
         #endregion
@@ -292,7 +326,7 @@ namespace LazuplisMei.BinarySerializer
                 return serializable;
             }
 
-            foreach (var _converter in _converters)
+            foreach (var _converter in _Converters)
             {
                 var converter = _converter.GetInstance<IBinaryConverter>();
                 if (converter.CanConvert(type))
@@ -312,6 +346,22 @@ namespace LazuplisMei.BinarySerializer
                 return stream.ReadBytes(count);
             }
             return null;
+        }
+
+        /// <summary>
+        /// deserialize by not only values but also Type and properties/fields Name
+        /// </summary>
+        public static dynamic DeserializeWithTypeInfo(Stream stream)
+        {
+            IDictionary<string, object> result = new System.Dynamic.ExpandoObject();
+            int count = stream.ReadInt32();
+            for (int i = 0; i < count; i++)
+            {
+                var name = Deserialize<string>(stream);
+                var type = Deserialize<Type>(stream);
+                result.Add(name, Deserialize(type, stream));
+            }
+            return result;
         }
 
         #endregion
