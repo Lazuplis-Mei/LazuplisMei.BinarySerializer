@@ -62,6 +62,26 @@ byte[] buffer = Serializer.Serialize(typeof(Student));
 Type stuType = Serializer.Deserialize<Type>(buffer);
 ```
 
+# SerializeWithTypeInfo
+
+```cs
+class Student
+{
+    public string Name;
+    public int Id;
+}
+
+var stu = new Student() {Name = "Name001", Id = 1000 };
+var memory = new MemoryStream();
+Serializer.SerializeWithTypeInfo(stu, memory);
+memory.Seek(0, SeekOrigin.Begin);
+//result is a ExpaandoObject
+dynamic result = Serializer.DeserializeWithTypeInfo(memory);
+//result.Name == "Name001" && result.Id == 1000
+```
+
+
+
 # Private Member
 
 ```cs
