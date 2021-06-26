@@ -90,7 +90,10 @@ namespace LazuplisMei.BinarySerializer.Core
             {
                 if (prop.TryGetValue(obj, out object value))
                 {
-                    Serializer.Serialize(prop.Type, value, stream);
+                    if (!prop.TrySerialize(stream, value))
+                    {
+                        Serializer.Serialize(prop.Type, value, stream);
+                    }
                 }
             }
         }
@@ -119,7 +122,11 @@ namespace LazuplisMei.BinarySerializer.Core
             {
                 if (!prop.Ignored)
                 {
-                    prop.SetValue(result, Serializer.Deserialize(prop.Type, stream));
+                    if (!prop.TryDeserialize(stream, out object value))
+                    {
+                        value = Serializer.Deserialize(prop.Type, stream);
+                    }
+                    prop.SetValue(result, value);
                 }
             }
 

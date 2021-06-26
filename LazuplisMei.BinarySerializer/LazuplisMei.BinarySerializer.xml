@@ -69,6 +69,21 @@
             index for field or property while  serializing
             </summary>
         </member>
+        <member name="T:LazuplisMei.BinarySerializer.BinaryConverterAttribute">
+            <summary>
+            specify a BinaryConverter for field or property
+            </summary>
+        </member>
+        <member name="P:LazuplisMei.BinarySerializer.BinaryConverterAttribute.BinaryConverter">
+            <summary>
+            BinaryConverter
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.BinaryConverterAttribute.#ctor(System.Type)">
+            <summary>
+            BinaryConverter
+            </summary>
+        </member>
         <member name="T:LazuplisMei.BinarySerializer.Converter.KeyValuePairConverter">
             <summary>
             base implement for <see cref="T:LazuplisMei.BinarySerializer.Converter.DictionaryConverter"/>

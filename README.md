@@ -1,3 +1,24 @@
+# Nuget Package
+
+> [Latest1.0.3](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/)
+> - **add BinaryConverterAttribute**
+
+> [1.0.2](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/1.0.2)
+> - **add Serializer.SerializeWithTypeInfo**
+> - **add Serializer.DeserializeWithTypeInfo**
+
+> [1.0.1.1](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/1.0.1.1)
+> - **add BinaryIndexAttribute**
+
+> [1.0.0.1](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/1.0.0.1)
+> - **internl LazuplisMei.BinarySerializer.Converter**
+> - ***void* IBinarySerializable.Deserialize(use IBinarySerializable object itself)**
+> - **add xml comment**
+
+
+> [1.0.0](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/1.0.0)
+
+
 # Simple Example
 
 ```cs
@@ -43,6 +64,22 @@ byte[] buffer = Serializer.Serialize(new TestClass() {AAA = "AAA", BBB = 0 });
 TestClass stu = Serializer.Deserialize<TestClass>(buffer);
 ```
 
+# BinaryConverterAttribute
+
+```cs
+class Student
+{
+    //this field with use MyStringConverter to (de)serialize
+    //but Serializer.SerializeWithTypeInfo and Serializer.DeserializeWithTypeInfo will ignore this attribute and use default internal StringConverter
+    [BinaryConverter(typeof(MyStringConverter))]
+    public string Name;
+    public int Id;
+}
+
+byte[] buffer = Serializer.Serialize(new Student() {Name = "Name001", Id = 1000 });
+Student stu = Serializer.Deserialize<Student>(buffer);
+//stu.Name based on MyStringConverter's behavior && stu.Id == 1000
+```
 
 # add assembly to find type
 

@@ -10,10 +10,10 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</RepositoryUrl>
     <PackageId>LazuplisMei.BinarySerializer</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
     <PackageProjectUrl>https://github.com/Lazuplis-Mei/LazuplisMei.BinarySerializer</PackageProjectUrl>
     <PackageTags>BinarySerializer</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

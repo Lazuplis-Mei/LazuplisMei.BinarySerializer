@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LazuplisMei.BinarySerializer.Core;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -107,6 +108,27 @@ namespace LazuplisMei.BinarySerializer
         public BinaryIndexAttribute(int index)
         {
             Index = index;
+        }
+    }
+
+    /// <summary>
+    /// specify a BinaryConverter for field or property
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+    public class BinaryConverterAttribute : Attribute
+    {
+        /// <summary>
+        /// BinaryConverter
+        /// </summary>
+        public IBinaryConverter BinaryConverter { get; }
+        /// <summary>
+        /// BinaryConverter
+        /// </summary>
+        public BinaryConverterAttribute(Type type)
+        {
+            if (type?.GetInterface(nameof(IBinaryConverter)) == null)
+                throw new ArgumentException("type must implemente IBinaryConverter");
+            BinaryConverter = type.GetInstance<IBinaryConverter>();
         }
     }
 }
