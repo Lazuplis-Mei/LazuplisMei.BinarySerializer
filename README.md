@@ -1,6 +1,16 @@
 # Nuget Package
 
-> [Latest1.0.3](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/)
+> [Latest](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/)
+> - **add BigIntegerConverter**
+> - **add ComplexConverter**
+> - **add VectorConverter**
+> - **public ListConverter**
+> - **add Utilities.ReadDouble**
+> - **add Utilities.WriteDouble**
+> - **add Utilities.ReadFloat**
+> - **add Utilities.WriteFloat**
+
+> [1.0.3](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/1.0.3)
 > - **add BinaryConverterAttribute**
 
 > [1.0.2](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/1.0.2)
@@ -18,6 +28,68 @@
 
 > [1.0.0](https://www.nuget.org/packages/LazuplisMei.BinarySerializer/1.0.0)
 
+
+# Built-In-Converters
+- ## ElementTypeConverter
+  - ### `bool`
+  - ### `char`
+  - ### `short`
+  - ### `int`
+  - ### `long`
+  - ### `ushort`
+  - ### `uint`
+  - ### `ulong`
+  - ### `float`
+  - ### `double`
+  - ### `byte`
+  - ### `sbyte`
+  - ### `decimal`
+- ## NullableConverter
+  - ### `Nullable<T>`
+- ## ListConverter
+  - ### `List<T>`
+- ## IEnumerableConverter
+  - ### Any`IEnumerable<T>` as `List<T>`
+- ## ArrayConverter
+  - ### Any Rank `Array`
+- ## HashSetConverter
+  - ### `HashSet<T>`
+- ## StackConverter
+  - ### `Stack<T>`
+- ## QueueConverter
+  - ### `Queue<T>`
+- ## DictionaryConverter
+  - ### `Dictionary<TKey,TValue>`
+- ## KeyValuePairConverter
+  - ### `KeyValuePair<TKey,TValue>`
+- ## StringConverter
+  - ### `string`
+- ## DateTimeConverter
+  - ### `DateTime`
+- ## DateTimeOffsetConverter
+  - ### `DateTimeOffset`
+- ## TimeSpanConverter
+  - ### `TimeSpan`
+- ## EnocdingConverter
+  - ### `Enocding`
+- ## TypeConverter
+  - ### `Type`
+- ## BigIntegerConverter
+  - ### `BigInteger`
+- ## ComplexConverter
+  - ### `Complex`
+- ## VectorConverter
+  - ### `Vector<T>`
+- ## ObjectConverter
+  - ### `Quaternion`
+  - ### `Matrix3x2`
+  - ### `Matrix4x4`
+  - ### `Vector2`
+  - ### `Vector3`
+  - ### `Vector4`
+  - ### `Plane`
+  - ### Any `Enum`
+  - ### other general types with accessible properties
 
 # Simple Example
 

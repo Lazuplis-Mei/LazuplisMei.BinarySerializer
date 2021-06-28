@@ -119,7 +119,12 @@ namespace LazuplisMei.BinarySerializer
             AddConverter<EnocdingConverter>();
 
             AddConverter<TypeConverter>();
-            
+
+            AddConverter<BigIntegerConverter>();
+            AddConverter<ComplexConverter>();
+
+            AddConverter<VectorConverter>();
+
             AddAssembly(typeof(int).Assembly);
         }
 

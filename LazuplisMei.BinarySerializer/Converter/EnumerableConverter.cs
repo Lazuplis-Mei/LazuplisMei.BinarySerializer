@@ -8,13 +8,17 @@ using System.Text;
 namespace LazuplisMei.BinarySerializer.Converter
 {
     
+    /// <summary>
+    /// ListConverter used for serializer a list of objects
+    /// </summary>
     [GenericConverter(typeof(List<>))]
-    class ListConverter : GenericConverter
+    public class ListConverter : GenericConverter
     {
 
         /// <summary>
         /// read a list of data from stream
         /// </summary>
+        /// <returns><see cref="List{T}"/></returns>
         public static object ListReadBytes(Type internalType, Stream stream)
         {
             var listType = typeof(List<>).MakeGenericType(internalType);
@@ -29,14 +33,21 @@ namespace LazuplisMei.BinarySerializer.Converter
             return list;
         }
 
+        /// <summary>
+        /// read a list of data from stream
+        /// </summary>
         public override object GenericReadBytes(Stream stream)
         {
             return ListReadBytes(TypeArgs[0], stream);
         }
 
+
         /// <summary>
         /// write a list of data to stream
         /// </summary>
+        /// <param name="internalType"></param>
+        /// <param name="stream"></param>
+        /// <param name="obj">any object implemented <see cref="System.Collections.IEnumerable"/></param>
         public static void ListWriteBytes(Type internalType, Stream stream, object obj)
         {
             var list = ((System.Collections.IEnumerable)obj).Cast<object>();
@@ -47,6 +58,9 @@ namespace LazuplisMei.BinarySerializer.Converter
             }
         }
 
+        /// <summary>
+        /// write a list of data to stream
+        /// </summary>
         public override void GenericWriteBytes(Stream stream, object obj)
         {
             ListWriteBytes(TypeArgs[0], stream, obj);

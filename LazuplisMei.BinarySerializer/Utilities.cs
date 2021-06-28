@@ -190,7 +190,39 @@ namespace LazuplisMei.BinarySerializer
         {
             stream.Write(BitConverter.GetBytes(num), 0, 8);
         }
-        
+
+        /// <summary>
+        /// read a <see cref="double"/> from stream
+        /// </summary>
+        public static double ReadDouble(this Stream self)
+        {
+            return BitConverter.ToDouble(self.ReadBytes(8), 0);
+        }
+
+        /// <summary>
+        /// write a <see cref="double"/> to stream
+        /// </summary>
+        public static void WriteDouble(this Stream stream, double num)
+        {
+            stream.Write(BitConverter.GetBytes(num), 0, 8);
+        }
+
+        /// <summary>
+        /// read a <see cref="float"/> from stream
+        /// </summary>
+        public static float ReadFloat(this Stream self)
+        {
+            return BitConverter.ToSingle(self.ReadBytes(4), 0);
+        }
+
+        /// <summary>
+        /// write a <see cref="float"/> to stream
+        /// </summary>
+        public static void WriteFloat(this Stream stream, float num)
+        {
+            stream.Write(BitConverter.GetBytes(num), 0, 4);
+        }
+
         #endregion
 
     }

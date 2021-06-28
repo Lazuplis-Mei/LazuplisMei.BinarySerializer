@@ -94,12 +94,31 @@
             element keyword type
             </summary>
         </member>
+        <member name="T:LazuplisMei.BinarySerializer.Converter.ListConverter">
+            <summary>
+            ListConverter used for serializer a list of objects
+            </summary>
+        </member>
         <member name="M:LazuplisMei.BinarySerializer.Converter.ListConverter.ListReadBytes(System.Type,System.IO.Stream)">
+            <summary>
+            read a list of data from stream
+            </summary>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Converter.ListConverter.GenericReadBytes(System.IO.Stream)">
             <summary>
             read a list of data from stream
             </summary>
         </member>
         <member name="M:LazuplisMei.BinarySerializer.Converter.ListConverter.ListWriteBytes(System.Type,System.IO.Stream,System.Object)">
+            <summary>
+            write a list of data to stream
+            </summary>
+            <param name="internalType"></param>
+            <param name="stream"></param>
+            <param name="obj">any object implemented <see cref="T:System.Collections.IEnumerable"/></param>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Converter.ListConverter.GenericWriteBytes(System.IO.Stream,System.Object)">
             <summary>
             write a list of data to stream
             </summary>
@@ -484,6 +503,26 @@
         <member name="M:LazuplisMei.BinarySerializer.Utilities.WriteInt64(System.IO.Stream,System.Int64)">
             <summary>
             write a <see cref="T:System.Int64"/> to stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.ReadDouble(System.IO.Stream)">
+            <summary>
+            read a <see cref="T:System.Double"/> from stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.WriteDouble(System.IO.Stream,System.Double)">
+            <summary>
+            write a <see cref="T:System.Double"/> to stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.ReadFloat(System.IO.Stream)">
+            <summary>
+            read a <see cref="T:System.Single"/> from stream
+            </summary>
+        </member>
+        <member name="M:LazuplisMei.BinarySerializer.Utilities.WriteFloat(System.IO.Stream,System.Single)">
+            <summary>
+            write a <see cref="T:System.Single"/> to stream
             </summary>
         </member>
     </members>
